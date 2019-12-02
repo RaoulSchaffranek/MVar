@@ -33,7 +33,6 @@
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "husky": "^3.1.0",
     "jsverify": "^0.8.4",
     "tsdx": "^0.11.0",
     "tslib": "^1.10.0",
