@@ -25,7 +25,7 @@ jobs:
       env:
         CI: true
     - name: Make lcov.info-paths relative
-      run: sed -i "s|SF:/.*/src/|SF:/github/workspace/src/|g"
+      run: sed -i "s|SF:/.*/src/|SF:/github/workspace/src/|g" coverage/lcov.info
     - name: Analyze with SonarCloud
       uses: sonarsource/sonarcloud-github-action@master
       env:
