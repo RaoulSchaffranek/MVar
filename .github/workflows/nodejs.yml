@@ -24,6 +24,8 @@ jobs:
         npm test
       env:
         CI: true
+    - name: Make lcov.info-paths relative
+      run: sed -i "s|SF:/.*/src/|SF:/github/workspace/src/|g"
     - name: Analyze with SonarCloud
       uses: sonarsource/sonarcloud-github-action@master
       env:
