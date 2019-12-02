@@ -1,0 +1,43 @@
+{
+  "name": "mvar",
+  "version": "1.0.0",
+  "license": "UNLICENSE",
+  "author": "Raoul Schaffranek",
+  "description": "Predictable control-flow made easy",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:RaoulSchaffranek/MVar.git"
+  },
+  "main": "dist/index.js",
+  "module": "dist/mvar.ts.esm.js",
+  "umd:main": "dist/mvar.ts.umd.production.min.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build --format cjs,esm,umd",
+    "test": "tsdx test --coverage",
+    "lint": "eslint src/**.ts test/**.ts --fix",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@typescript-eslint/eslint-plugin": "^2.9.0",
+    "@typescript-eslint/parser": "^2.9.0",
+    "eslint": "^6.7.1",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^3.1.0",
+    "jsverify": "^0.8.4",
+    "tsdx": "^0.11.0",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.2",
+    "vuepress": "^1.2.0"
+  }
+}

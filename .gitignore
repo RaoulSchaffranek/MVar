@@ -1,0 +1,9 @@
+.rts2_cache_*/
+.scannerwork/
+.vscode/
+coverage/
+dist/
+docs/
+examples/
+node_modules/
+package-lock.json
