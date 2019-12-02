@@ -88,8 +88,8 @@ export default class MVar<a> {
    * If the MVar is empty, sets the contents of the MVar.
    * If the MVar is full, queues the value until the MVar becomes empty.
    */
-  public put (x: a): void {
-    this.putQueue.push(x)
+  public put (y: a): void {
+    this.putQueue.push(y)
     while (this.taskQueue.length !== 0 && this.putQueue.length !== 0) {
       const cont = this.taskQueue.shift()!
       if ('take' in cont) {
