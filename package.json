@@ -10,8 +10,8 @@
     "url": "git@github.com:RaoulSchaffranek/MVar.git"
   },
   "main": "dist/index.js",
-  "module": "dist/mvar.ts.esm.js",
-  "umd:main": "dist/mvar.ts.umd.production.min.js",
+  "module": "dist/mvar.esm.js",
+  "umd:main": "dist/mvar.umd.production.min.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist"
