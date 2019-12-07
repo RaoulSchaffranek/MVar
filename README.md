@@ -5,12 +5,6 @@
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=RaoulSchaffranek_MVar&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=RaoulSchaffranek_MVar)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=RaoulSchaffranek_MVar&metric=security_rating)](https://sonarcloud.io/dashboard?id=RaoulSchaffranek_MVar)
 
-An MVar represents a shared, mutable variable. It can be thought of as an asynchronous first-in-first-out-queue, where `put` queues values and `take` takes values out of the queue. MVars are usefull to synchronize read- and write-operations on shared variables between concurrent tasks.
+MVar is a low-level library for concurrent programming in TypeScript and JavaScript. It provides a single data type of the same name, inspired by [Haskell's MVar](http://hackage.haskell.org/package/base-4.12.0.0/docs/Control-Concurrent-MVar.html#t:MVar). An `MVar` represents an abstract resource that can be shared by multiple concurrent tasks. Access-operations on MVars are atomic and serve as synchronization primitives between concurrent tasks.
 
-## Installation
-
-MVar is available as a npm-package.
-
-~~~bash
-npm i mvar
-~~~
+Head over to the [offical documentation-site](https://raoulschaffranek.github.io/MVar/) for installation instructions and documentation.

@@ -3,6 +3,6 @@
 .vscode/
 coverage/
 dist/
-docs/
+docs/.vuepress/dist
 examples/
 node_modules/
