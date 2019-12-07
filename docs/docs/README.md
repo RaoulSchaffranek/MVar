@@ -56,6 +56,15 @@ ES5 (UMD build)
 MVar.MVar
 ~~~
 
+## Example
+
+Let's write a simple counter-application using MVar. The application will have
+buttons to increment and decrement the counter. We will use an MVar to mediate
+the button-clicks through a synchronized communication-channel and implement
+an explicit event-loop on top of it:
+
+<iframe style="width:100%; min-height:41rem" src="https://stackblitz.com/edit/mvar-counter?embed=1&file=index.ts&hideExplorer=1"></iframe>
+
 ## API
 
 ### `MVar.newEmpty`
