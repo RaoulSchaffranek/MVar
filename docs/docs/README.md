@@ -53,7 +53,7 @@ var MVar = require('mvar').MVar
 ES5 (UMD build)
 
 ~~~js
-MVar.MVar
+var MVar = mvar.MVar
 ~~~
 
 ## Example
