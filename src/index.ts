@@ -27,7 +27,7 @@ export class MVarEmptyError extends Error {
  * An MVar can be used to synchronize read and write-accesses between
  * concurrent tasks.
  */
-export default class MVar<a> {
+export class MVar<a> {
   /**
    * Internal queue for incoming values
    */
