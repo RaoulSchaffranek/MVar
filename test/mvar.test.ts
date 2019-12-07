@@ -1,4 +1,4 @@
-import MVar, { MVarEmptyError } from '../src'
+import { MVar, MVarEmptyError } from '../src'
 import { checkForall, integer } from 'jsverify'
 
 /* eslint-env jest */
