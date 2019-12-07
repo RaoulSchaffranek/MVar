@@ -1,10 +1,11 @@
 {
   "name": "mvar",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "license": "Unlicense",
   "author": "Raoul Schaffranek",
-  "description": "MVar-datatype for predictable low-level concurrency.",
+  "description": "MVar data type for predictable low-level concurrency.",
   "keywords": ["concurrency", "flow control", "async", "await", "promise"],
+  "homepage": "https://raoulschaffranek.github.io/MVar/",
   "repository": {
     "type": "git",
     "url": "git@github.com:RaoulSchaffranek/MVar.git"
