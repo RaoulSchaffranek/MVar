@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/mvar',
+  base: '/MVar',
   title: 'MVar',
   themeConfig: {
     nav: [
