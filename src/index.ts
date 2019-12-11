@@ -1,12 +1,4 @@
 /**
- * Internal type-alias for asynchronous tasks.
- */
-type Task<a> =
-  {take: (x: a) => void} |
-  {read: (x: a) => void} |
-  {swap: (x: a) => void, x: a}
-
-/**
  * Represents a runtime-exception, that occurs when trying to read
  * or take a value from an empty MVar. {@link MVar.prototype.tryRead} and {@link MVar.prototype.tryTake}
  */
@@ -36,16 +28,69 @@ export class MVar<a> {
   /**
    * Internal queue for consuming tasks
    */
-  private taskQueue: Array<Task<a>>
+  private taskQueue: Array<() => void>
 
   /**
    * Internal constructor of an MVar.
    *
    * Users of the library should use {@link MVar.newEmpty} or {@link MVar.new} instead.
    */
-  private constructor (putQueue: Array<a>, taskQueue: Array<Task<a>>) {
+  private constructor (putQueue: Array<a>, taskQueue: Array<() => void>) {
     this.putQueue = putQueue
     this.taskQueue = taskQueue
+  }
+
+  /**
+   * Return the first-element of the internal putQueue and removes it.
+   *
+   * CAUTION: If the putQueue is empty the behavior is undefined.
+   * A call to this method must be protected by a guard which guarantees that
+   * the putQueue is not empty.
+   */
+  private runTake (): a {
+    return this.putQueue.shift()!
+  }
+
+  /**
+   * Return the first-element of the internal putQueue.
+   *
+   * CAUTION: If the putQueue is empty the behavior is undefined.
+   * A call to this method must be protected by a guard which guarantees that
+   * the putQueue is not empty.
+   */
+  private runRead (): a {
+    return this.putQueue[0]!
+  }
+
+  /**
+   * Return the first element of the internal putQueue, removes it, and queues
+   * a new value.
+   *
+   * CAUTION: If the putQueue is empty the behavior is undefined.
+   * A call to this method must be protected by a guard which guarantees that
+   * the putQueue is not empty.
+   */
+  private runSwap (y: a): a {
+    const x = this.putQueue.shift()!
+    this.putQueue.push(y)
+    return x
+  }
+
+  /**
+   * Schedule a thunk. Returns a promise that resolves with the return value
+   * from the thunk when it is executed.
+   *
+   * If the putQueue is empty the thunk is executed synchrounsly;
+   * otherwise the thunk is executed when the next element is put into the queue.
+   */
+  private schedule (task: () => a): Promise<a> {
+    return new Promise(resolve => {
+      if (this.putQueue.length > 0) {
+        resolve(task())
+      } else {
+        this.taskQueue.push(() => resolve(task()))
+      }
+    })
   }
 
   /**
@@ -72,14 +117,7 @@ export class MVar<a> {
    * When the promise is resolved, the MVar is left empty.
    */
   public take (): Promise<a> {
-    if (this.putQueue.length === 0) {
-      return new Promise(resolve => {
-        this.taskQueue.push({ take: resolve })
-      })
-    } else {
-      const x = this.putQueue.shift()!
-      return Promise.resolve(x)
-    }
+    return this.schedule(() => this.runTake())
   }
 
   /**
@@ -92,17 +130,7 @@ export class MVar<a> {
     this.putQueue.push(y)
     while (this.taskQueue.length !== 0 && this.putQueue.length !== 0) {
       const cont = this.taskQueue.shift()!
-      if ('take' in cont) {
-        const x = this.putQueue.shift()!
-        cont.take(x)
-      } else if ('read' in cont) {
-        const x = this.putQueue[0]
-        cont.read(x)
-      } else /* if ('swap' in cont) */ {
-        const x = this.putQueue.shift()!
-        cont.swap(x)
-        this.putQueue.push(cont.x)
-      }
+      cont()
     }
   }
 
@@ -117,14 +145,7 @@ export class MVar<a> {
    * Read does not alter the contents of the MVar.
    */
   public read (): Promise<a> {
-    if (this.putQueue.length === 0) {
-      return new Promise(resolve => {
-        this.taskQueue.push({ read: resolve })
-      })
-    } else {
-      const x = this.putQueue[0]
-      return Promise.resolve(x)
-    }
+    return this.schedule(() => this.runRead())
   }
 
   /**
@@ -138,15 +159,7 @@ export class MVar<a> {
    * Queues the supplied value for later consumption.
    */
   public swap (y: a): Promise<a> {
-    if (this.putQueue.length === 0) {
-      return new Promise(resolve => {
-        this.taskQueue.push({ swap: resolve, x: y })
-      })
-    } else {
-      const x = this.putQueue.shift()!
-      this.putQueue.push(y)
-      return Promise.resolve(x)
-    }
+    return this.schedule(() => this.runSwap(y))
   }
 
   /**
@@ -159,7 +172,7 @@ export class MVar<a> {
    */
   public tryTake (): a {
     if (this.putQueue.length !== 0) {
-      return this.putQueue.shift()!
+      return this.runTake()
     } else {
       throw new MVarEmptyError()
     }
@@ -173,7 +186,7 @@ export class MVar<a> {
    */
   public tryPut (x: a): boolean {
     if (this.putQueue.length === 0) {
-      this.putQueue.push(x)
+      this.put(x)
       return true
     }
     return false
@@ -199,7 +212,7 @@ export class MVar<a> {
    */
   public tryRead (): a {
     if (this.putQueue.length !== 0) {
-      return this.putQueue[0]
+      return this.runRead()
     } else {
       throw new MVarEmptyError()
     }
