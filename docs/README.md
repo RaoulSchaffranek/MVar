@@ -7,7 +7,7 @@ heroText: MVar
 description: MVar data type for predictable low-level concurrency
 features:
 - title: Focused
-  details: No dependencies. Barely 1.12KB minified and gzipped. MVar is only concerned with flow control and integrates with any state-management solution.
+  details: No dependencies. Barely 1.08KB minified and gzipped. MVar is only concerned with flow control and integrates with any state-management solution.
 - title: Univeral
   details: Runs on every JavaScript-runtime-system. Builds are available for ES6 native modules, UMD, AMD, CommonJS, and as a standalone script.
 - title: Hygienic
