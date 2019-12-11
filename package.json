@@ -1,10 +1,16 @@
 {
   "name": "mvar",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "license": "Unlicense",
   "author": "Raoul Schaffranek",
   "description": "MVar data type for predictable low-level concurrency.",
-  "keywords": ["concurrency", "flow control", "async", "await", "promise"],
+  "keywords": [
+    "concurrency",
+    "flow control",
+    "async",
+    "await",
+    "promise"
+  ],
   "homepage": "https://raoulschaffranek.github.io/MVar/",
   "repository": {
     "type": "git",
@@ -27,11 +33,11 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",
-    "@typescript-eslint/eslint-plugin": "^2.10.0",
-    "@typescript-eslint/parser": "^2.10.0",
+    "@typescript-eslint/eslint-plugin": "^2.11.0",
+    "@typescript-eslint/parser": "^2.11.0",
     "eslint": "^6.7.2",
     "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
