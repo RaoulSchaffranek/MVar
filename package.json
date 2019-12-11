@@ -1,6 +1,6 @@
 {
   "name": "mvar",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "license": "Unlicense",
   "author": "Raoul Schaffranek",
   "description": "MVar data type for predictable low-level concurrency.",
